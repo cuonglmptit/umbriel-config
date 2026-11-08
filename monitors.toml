@@ -7,6 +7,9 @@ focus_at_startup = true
 workspace_axis = "horizontal"
 # mode = "1920x1080@144"
 
+# min_workspaces = 1
+workspaces = 10
+
 
 [keybinds]
 "Ctrl+Alt+Up" = "spawn wlr-randr --output eDP-1 --transform normal"
