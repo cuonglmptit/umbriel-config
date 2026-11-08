@@ -1,0 +1,87 @@
+# ~/.config/umbriel/layout.toml
+# Cấu hình các loại Layout (Master, Dwindle, Scrolling) và Tab Groups
+
+[layout]
+# Layout khởi động mặc định: "master" (hoặc "scrolling", "dwindle", "stacking")
+mode = "master"
+
+# Khoảng cách giữa các cửa sổ (gaps_in = 3)
+gap = 3
+
+# Các mốc tỉ lệ cửa sổ khi bấm phím co giãn nhanh (1/3, 1/2, 2/3 màn hình)
+extent_presets = [0.333, 0.5, 0.667]
+
+# Hành vi khi ứng dụng tự gửi lệnh Maximize (nút phóng to của app)
+# "column": phóng to vừa vặn cột hiện tại (giữ khoảng cách gap và thanh bar)
+# "edges": phủ toàn bộ diện tích không kể gap và border
+client_maximize = "edges"
+
+# ==============================================================================
+# BÙ TRỪ KHOẢNG CÁCH MÉP MÀN HÌNH (STRUTS)
+# ==============================================================================
+[layout.struts]
+right = -3
+left = -3
+top = -3
+bottom = -3
+
+# ==============================================================================
+# 1. CẤU HÌNH MASTER LAYOUT
+# ==============================================================================
+[layout.master]
+# Vị trí cột Master: "left" (cửa sổ chính bên trái, các app phụ nằm bên phải)
+position = "left"
+
+# Tỉ lệ mặc định của cột Master: 55% màn hình (app phụ chiếm 45%)
+default_width_fraction = 0.55
+
+# Cửa sổ mới thêm vào cột phụ (slave) sẽ nằm trên cùng (new_on_top = true)
+new_on_top = true
+
+# Cửa sổ mới mở KHÔNG cướp quyền làm Master (tương đương new_status = "slave")
+new_becomes_master = false
+
+# ==============================================================================
+# 2. CẤU HÌNH DWINDLE LAYOUT
+# ==============================================================================
+[layout.dwindle]
+# Giữ cố định hướng chia cắt ban đầu khi cửa sổ xung quanh thay đổi (preserve_split = true)
+preserve_split = true
+
+# Mở cửa sổ mới theo vị trí con trỏ chuột
+new_toward_cursor = false
+
+# ==============================================================================
+# 3. CẤU HÌNH SCROLLING LAYOUT (Đặc sản của Umbriel)
+# ==============================================================================
+[layout.scrolling]
+# Cột mới mở mặc định chiếm 50% màn hình
+default_extent_fraction = 0.5
+
+# Căn giữa dải cửa sổ nếu chưa lấp đầy màn hình
+center_underfull_strip = true
+
+# Không tự động giật khung hình ra giữa khi chuyển focus
+center_focused = "never"
+
+# Khi chọn cửa sổ từ Workspace Overview thì tự căn giữa cột đó
+center_on_overview_select = true
+
+# ==============================================================================
+# 4. HÀNH VI CỦA NHÓM TAB (TƯƠNG ĐƯƠNG GROUP CỦA HYPRLAND)
+# ==============================================================================
+[layout.tabs]
+# Cách hiển thị khi vừa tạo cột/nhóm: "normal" (xếp chồng thông thường)
+default_display = "normal"
+
+# Tab mới tạo sẽ chèn ngay sau Tab đang đọc (insert_after_current = true)
+new_tab_position = "after_active"
+
+# Bấm phím next/prev tab ở đầu/cuối danh sách sẽ tự xoay vòng (wrap)
+wrap_focus = true
+
+# Lăn chuột trên thanh Tab để chuyển nhanh qua lại các tab (scrolling = true)
+scroll_switches_tabs = true
+
+# Bấm chuột giữa lên nút Tab để đóng nhanh cửa sổ (middle_click_close = true)
+middle_click_closes = true

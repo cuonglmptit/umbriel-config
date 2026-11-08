@@ -1,0 +1,12 @@
+[include]
+files = [
+  "monitors.toml",
+  "environment.toml",
+  "general.toml",
+  "appearance.toml",
+  "layout.toml",
+  "input.toml",
+  "keybinds.toml",
+  "rules.toml",
+  "animation.toml",
+]

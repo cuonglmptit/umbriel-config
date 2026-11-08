@@ -1,0 +1,204 @@
+# ~/.config/umbriel/keybinds.toml
+# Toàn bộ phím tắt hệ thống, điều hướng, Submaps và Noctalia v5.4.1 IPC
+
+[keybinds]
+# ==============================================================================
+# 1. ỨNG DỤNG CƠ BẢN & ĐIỀU HÀNH HỆ THỐNG
+# ==============================================================================
+"Mod+Return"   = { action = "spawn kitty", repeat = false }
+"Mod+KP_Enter" = { action = "spawn kitty", repeat = false }
+"Mod+Y"        = { action = "spawn nautilus", repeat = false }
+"Mod+C"        = { action = "window-close", repeat = false }
+"Mod+Ctrl+M"   = { action = "session-quit", repeat = false }
+"Mod+Shift+C"  = { action = "config-reload", repeat = false }
+"Mod+O"        = { action = "overview-toggle", repeat = false }
+"Mod+Shift+Escape" = { action = "shortcuts-inhibit-toggle", allow_when_inhibited = true, repeat = false }
+"Alt+Shift_L"  = "spawn fcitx5-remote -t"
+
+# ==============================================================================
+# 2. ĐỔI LAYOUT XOAY VÒNG (NATIVE ACTION)
+# ==============================================================================
+"Mod+Tab" = "workspace-set-layout toggle master dwindle scrolling stacking"
+
+# ==============================================================================
+# 3. ĐIỀU HƯỚNG FOCUS & DI CHUYỂN CỬA SỔ
+# ==============================================================================
+"Mod+H" = "window-focus-left"
+"Mod+J" = "window-focus-down"
+"Mod+K" = "window-focus-up"
+"Mod+L" = "window-focus-right"
+
+"Mod+Left"  = "window-focus-left"
+"Mod+Down"  = "window-focus-down"
+"Mod+Up"    = "window-focus-up"
+"Mod+Right" = "window-focus-right"
+
+"Mod+A" = "window-focus-previous"
+"Mod+D" = "window-focus-next"
+
+"Mod+Shift+H" = "column-move-left"
+"Mod+Shift+J" = "window-move-down"
+"Mod+Shift+K" = "window-move-up"
+"Mod+Shift+L" = "column-move-right"
+
+"Mod+Alt+H" = "window-swap-left"
+"Mod+Alt+J" = "window-swap-down"
+"Mod+Alt+K" = "window-swap-up"
+"Mod+Alt+L" = "window-swap-right"
+
+# ==============================================================================
+# 4. KÍCH THƯỚC & TRẠNG THÁI CỬA SỔ (MASTER LAYOUT)
+# ==============================================================================
+"Mod+Minus" = { action = "window-modify-primary-extent -0.05", repeat = true }
+"Mod+Equal" = { action = "window-modify-primary-extent +0.05", repeat = true }
+"Mod+S"     = "window-swap-left"
+"Mod+B"     = { action = "window-toggle-floating", repeat = false }
+"Mod+P"     = { action = "window-toggle-pinned", repeat = false }
+"Mod+Ctrl+F"= { action = "window-toggle-maximize", repeat = false }
+"Mod+F"     = { action = "window-toggle-maximize-to-edges", repeat = false }
+"Mod+Shift+F" = { action = "window-toggle-fullscreen", repeat = false }
+
+# ==============================================================================
+# 5. QUẢN LÝ NHÓM TAB (TAB GROUPS)
+# ==============================================================================
+"Mod+G"     = { action = "column-toggle-tabbed", repeat = false }
+"Mod+Shift+U"     = "column-focus-tab-previous"
+"Mod+Shift+O"     = "column-focus-tab-next"
+"Mod+Alt+U" = "column-move-tab-previous"
+"Mod+Alt+O" = "column-move-tab-next"
+"Mod+Alt+D" = "window-consume-or-expel-left"
+
+# ==============================================================================
+# 6. MA TRẬN WORKSPACE BÊN TAY TRÁI (QWERT & 12345)
+# ==============================================================================
+"Mod+Q" = "workspace-switch 1"
+"Mod+W" = "workspace-switch 2"
+"Mod+E" = "workspace-switch 3"
+"Mod+R" = "workspace-switch 4"
+"Mod+T" = "workspace-switch 5"
+
+"Mod+1" = "workspace-switch 6"
+"Mod+2" = "workspace-switch 7"
+"Mod+3" = "workspace-switch 8"
+"Mod+4" = "workspace-switch 9"
+"Mod+5" = "workspace-switch 10"
+
+"Mod+Ctrl+Q" = "window-move-to-workspace 1"
+"Mod+Ctrl+W" = "window-move-to-workspace 2"
+"Mod+Ctrl+E" = "window-move-to-workspace 3"
+"Mod+Ctrl+R" = "window-move-to-workspace 4"
+"Mod+Ctrl+T" = "window-move-to-workspace 5"
+
+"Mod+Ctrl+1" = "window-move-to-workspace 6"
+"Mod+Ctrl+2" = "window-move-to-workspace 7"
+"Mod+Ctrl+3" = "window-move-to-workspace 8"
+"Mod+Ctrl+4" = "window-move-to-workspace 9"
+"Mod+Ctrl+5" = "window-move-to-workspace 10"
+
+"Mod+WheelUp"   = "workspace-previous"
+"Mod+WheelDown" = "workspace-next"
+
+# ==============================================================================
+# 7. SCRATCHPAD (SPECIAL WORKSPACE)
+# ==============================================================================
+"Mod+I"           = "scratchpad-toggle"
+"Mod+Ctrl+I"      = { action = "window-move-to-scratchpad", repeat = false }
+"Mod+Shift+Space" = { action = "window-move-to-scratchpad", repeat = false }
+"Mod+Ctrl+Space"  = { action = "window-restore-from-scratchpad", repeat = false }
+
+# ==============================================================================
+# 8. ĐIỀU KHIỂN CHUỘT (WL-KBPTR & SUBMAP YDOTOOL)
+# ==============================================================================
+"Mod+M"     = "spawn sh -c 'killall -9 wl-kbptr; wl-kbptr -o modes=tile,click'"
+"Mod+N"     = "spawn sh -c 'killall -9 wl-kbptr; wl-kbptr -o modes=bisect,click'"
+"Mod+Alt+M" = "spawn sh -c 'killall -9 wl-kbptr; wl-kbptr -o modes=tile'"
+"Mod+Alt+N" = "spawn sh -c 'killall -9 wl-kbptr; wl-kbptr -o modes=bisect'"
+
+"Mod+Comma" = { action = "submap cursor", repeat = false }
+
+"submap[cursor],K" = { action = "spawn ydotool mousemove -- 0 -15", repeat = true }
+"submap[cursor],H" = { action = "spawn ydotool mousemove -- -15 0", repeat = true }
+"submap[cursor],J" = { action = "spawn ydotool mousemove 0 15",     repeat = true }
+"submap[cursor],L" = { action = "spawn ydotool mousemove 15 0",    repeat = true }
+
+"submap[cursor],N" = { action = "spawn ydotool mousemove --wheel -- 0 -2", repeat = true }
+"submap[cursor],M" = { action = "spawn ydotool mousemove --wheel -- 0 2",  repeat = true }
+
+"submap[cursor],U" = "spawn ydotool click 0xC0"
+"submap[cursor],I" = "spawn ydotool click 0xC2"
+"submap[cursor],O" = "spawn ydotool click 0xC1"
+"submap[cursor],Shift+U" = "spawn ydotool click 0xC0"
+"submap[cursor],Shift+I" = "spawn ydotool click 0xC2"
+"submap[cursor],Shift+O" = "spawn ydotool click 0xC1"
+
+"submap[cursor],Escape" = "submap reset"
+
+# ==============================================================================
+# 9. ĐIỀU KHIỂN NOCTALIA v5.4.1 NATIVE IPC
+# ==============================================================================
+# Mở Menu Ứng dụng (App Launcher)
+"Mod+Space" = "spawn noctalia msg panel-toggle launcher"
+
+# Bật/Tắt Control Center (Wifi, Bluetooth, Pin, v.v.)
+"Mod+Ctrl+S" = "spawn noctalia msg panel-toggle control-center"
+
+# Mở bảng Cài đặt tổng thể Noctalia Settings
+"Mod+Ctrl+Comma" = "spawn noctalia msg settings-toggle"
+
+# Mở lịch sử thông báo (Notification tab trong Control Center)
+"Mod+Ctrl+N" = "spawn noctalia msg panel-toggle control-center notifications"
+
+# Đổi Dark Mode / Light Mode
+"Mod+Ctrl+D" = "spawn noctalia msg theme-mode-toggle"
+
+# Bật bảng lịch sử Clipboard
+"Mod+V" = "spawn noctalia msg panel-toggle clipboard"
+
+# Bật chọn Emoji nhanh (v5 Launcher hỗ trợ query "/emoji")
+"Mod+Period" = "spawn noctalia msg panel-toggle launcher '/emo '"
+
+# Khóa màn hình tức thì
+"Mod+Ctrl+L" = "spawn noctalia msg session lock"
+
+# Mở Menu Nguồn (Session: Đăng xuất, Tắt máy, Khởi động lại)
+"Mod+Ctrl+U" = "spawn noctalia msg panel-toggle session"
+
+# Bật/Tắt chế độ chỉnh sửa Widget màn hình
+"Mod+Ctrl+K" = "spawn noctalia msg desktop-widgets-toggle-edit"
+
+# Ẩn / Hiện thanh Bar chính
+"Mod+Ctrl+H" = "spawn noctalia msg bar-toggle"
+
+# Mở Pavucontrol điều chỉnh âm lượng nâng cao
+"Ctrl+Mod+V" = "spawn sh -c 'pgrep -x pavucontrol && pkill -x pavucontrol || pavucontrol -t 3'"
+
+# Khóa máy và tắt màn hình (DPMS)
+"XF86PowerOff" = { action = "spawn sh -c 'noctalia msg session lock && sleep 0.5 && umbriel msg dpms-off'", allow_when_locked = true }
+"Mod+Ctrl+O"   = { action = "spawn sh -c 'noctalia msg session lock && sleep 0.5 && umbriel msg dpms-off'", allow_when_locked = true }
+
+# ==============================================================================
+# 10. PHÍM PHẦN CỨNG ĐỒNG BỘ QUA NOCTALIA OSD & MEDIA (v5.4.1)
+# ==============================================================================
+"XF86AudioRaiseVolume" = { action = "spawn noctalia msg volume-up", allow_when_locked = true, repeat = true }
+"XF86AudioLowerVolume" = { action = "spawn noctalia msg volume-down", allow_when_locked = true, repeat = true }
+"XF86AudioMute"        = { action = "spawn noctalia msg volume-mute", allow_when_locked = true, repeat = false }
+"XF86MonBrightnessUp"  = { action = "spawn noctalia msg brightness-up", allow_when_locked = true, repeat = true }
+"XF86MonBrightnessDown"= { action = "spawn noctalia msg brightness-down", allow_when_locked = true, repeat = true }
+
+# Điều khiển phát nhạc Media
+"XF86AudioPlay"  = { action = "spawn playerctl play-pause", allow_when_locked = true }
+"XF86AudioPause" = { action = "spawn playerctl play-pause", allow_when_locked = true }
+"XF86AudioNext"  = { action = "spawn playerctl next",       allow_when_locked = true }
+"XF86AudioPrev"  = { action = "spawn playerctl previous",   allow_when_locked = true }
+
+# ==============================================================================
+# 11. CHỤP ẢNH MÀN HÌNH (SCREENSHOTS)
+# ==============================================================================
+# 1. Chụp vùng chọn + Tự bung thanh Annotation để vẽ + Tự copy vào Clipboard
+"Mod+Shift+X" = { action = "spawn noctalia msg screenshot-region --annotate --copy-to-clipboard", repeat = false }
+
+# 2. Chụp toàn màn hình và tự động copy thẳng vào Clipboard
+"Print"       = { action = "spawn noctalia msg screenshot-fullscreen --annotate --copy-to-clipboard", repeat = false }
+
+# 3. Chụp riêng cửa sổ đang focus + Mở thanh Annotation
+"Alt+Print"   = { action = "spawn noctalia msg screenshot-window --annotate --copy-to-clipboard", repeat = false }

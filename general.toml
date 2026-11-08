@@ -1,0 +1,26 @@
+# ~/.config/umbriel/general.toml
+[general]
+# Phím Mod chính: "Super" (phím Windows)
+mod_key = "Super"
+
+# Bật XWayland cho các ứng dụng X11 cũ (JetBrains, game, v.v.)
+xwayland = true
+
+# Tự động đồng bộ scale và cursor theme sang ứng dụng X11 qua XSETTINGS
+xwayland_xsettings = true
+
+# Tắt tự động hiện bảng cheatsheet phím tắt khi vừa đăng nhập
+show_cheatsheet = false
+
+# Không cho phép ứng dụng tự cướp focus trừ khi được cấp quyền
+focus_on_activate = false
+
+# Gắn chặt dialog modal (cửa sổ thông báo/chọn file) vào cửa sổ cha
+attach_modal_dialogs = true
+
+autostart = ["noctalia"]
+
+[input.cursor]
+theme = "volantes_light_cursors"
+size = 24
+hardware_cursor = true

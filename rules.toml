@@ -1,0 +1,103 @@
+# ~/.config/umbriel/rules.toml
+# Toàn bộ quy tắc cửa sổ (Window Rules) và lớp giao diện (Layer Rules)
+
+# ==============================================================================
+# 1. LAYER RULES DÀNH CHO NOCTALIA v5
+# ==============================================================================
+# Bật hiệu ứng làm mờ xuyên thấu (Glass Blur) cho toàn bộ thành phần Noctalia
+[[layer_rule]]
+match.namespace = '^noctalia-(bar-[^"]+|notification|dock|panel|attached-panel|osd|desktop-widget-[^"]*)$'
+blur = true
+blur_ignore_alpha = 0.5
+blur_popups = true
+
+# Riêng các bảng trượt đè lên cửa sổ (Notifications, Control Center, Panels, OSD):
+# Tắt optimized blur để chúng làm mờ trực tiếp nội dung cửa sổ phía sau một cách chân thực
+[[layer_rule]]
+match.namespace = '^noctalia-(notification|dock|panel|attached-panel|osd)$'
+blur_optimized = false
+
+# ==============================================================================
+# 2. BẬT HIỆU ỨNG LÀM MỜ NỀN CHO CÁC CỬA SỔ
+# ==============================================================================
+# Cho phép tất cả cửa sổ có độ trong suốt được hưởng hiệu ứng blur
+[[window_rule]]
+blur = true
+
+# ==============================================================================
+# 3. ĐIỀU HƯỚNG ỨNG DỤNG TỰ ĐỘNG VÀO WORKSPACE
+# ==============================================================================
+# Workspace 2: Trình soạn thảo Code (VS Code & WebStorm)
+[[window_rule]]
+match.app_id = '^code$'
+default_workspace = 2
+
+[[window_rule]]
+match.app_id = '^jetbrains-webstorm.*'
+default_workspace = 2
+
+# Workspace 3: Backend & API (IntelliJ IDEA & Postman)
+[[window_rule]]
+match.app_id = '^jetbrains-idea.*'
+default_workspace = 3
+
+[[window_rule]]
+match.app_id = '^(Postman|postman)$'
+default_workspace = 3
+
+# Workspace 4: Cơ sở dữ liệu Database (DataGrip)
+[[window_rule]]
+match.app_id = '^jetbrains-datagrip.*'
+default_workspace = 4
+
+# ==============================================================================
+# 4. QUY TẮC CỬA SỔ NỔI TIỆN ÍCH (FLOATING UTILITIES)
+# ==============================================================================
+# Trình điều khiển âm thanh Pavucontrol
+[[window_rule]]
+match.app_id = '^org[.]pulseaudio[.]pavucontrol$'
+default_floating = true
+default_floating_size = { width = 0.5, height = 0.6 }
+
+# Trình vẽ ảnh Pinta (Mở nổi, chiếm 80% màn hình)
+[[window_rule]]
+match.app_id = '^com.github.PintaProject.Pinta$'
+default_floating = true
+default_floating_size = { width = 0.8, height = 0.8 }
+
+
+# Trình cài đặt Noctalia Settings
+[[window_rule]]
+match.app_id = '^dev.noctalia.Noctalia$'
+default_floating = true
+default_floating_size_px = { width = 1020, height = 900 }
+
+# Bảng chọn cửa sổ chia sẻ màn hình của Noctalia (Share Picker)
+[[window_rule]]
+match.app_id = '^dev.noctalia.UmbrielSharePicker$'
+default_floating = true
+default_floating_size_px = { width = 800, height = 600 }
+
+# Chế độ xem video thu nhỏ (Picture-in-Picture)
+[[window_rule]]
+match.title = '^(Picture-in-Picture|Picture in picture)$'
+default_floating = true
+default_maximize = false
+default_pinned = true
+default_position = { x = 20, y = 20, anchor = "bottom_right" }
+
+# ==============================================================================
+# 5. QUY TẮC ĐƯỜNG VIỀN ĐỘNG (DYNAMIC BORDERS)
+# ==============================================================================
+# Khi chỉ có 1 cửa sổ tiled trên màn hình:
+# Tự động chuyển sang chế độ giống hệt Mod+F (bỏ sạch gap và border)
+[[window_rule]]
+match.is_alone = true
+default_maximize_to_edges = true
+
+# Đổi màu viền riêng biệt khi cửa sổ chuyển sang trạng thái FLOATING
+# (Tương đương rgb(51, 204, 255) / rgb(250, 0, 139) bên file Lua cũ)
+[[window_rule]]
+match.is_floating = true
+border_color_focused = "#33CCFFFF"
+border_color_unfocused = "#FA008BFF"

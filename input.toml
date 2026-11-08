@@ -1,0 +1,82 @@
+# ~/.config/umbriel/input.toml
+# Cấu hình thiết bị đầu vào: Bàn phím, Chuột, Touchpad, Focus
+
+[input]
+# Tắt tính năng tự động dán văn bản bôi đen bằng nút cuộn chuột giữa (middle_click_paste = false)
+middle_click_paste = false
+
+# Cho phép kéo cửa sổ bằng thanh tiêu đề client của app (Chromium, Firefox, v.v.)
+client_window_drag = false
+
+# ==============================================================================
+# 1. CẤU HÌNH BÀN PHÍM
+# ==============================================================================
+[input.keyboard]
+# Kiểu bố cục bàn phím (kb_layout = "us")
+layout = "us"
+
+# Tự động bật đèn phím số NumLock khi khởi động (numlock_by_default = true)
+numlock_toggle = true
+
+# Tốc độ lặp phím khi giữ (mặc định: 25 lần/giây, delay 600ms)
+repeat_rate = 25
+repeat_delay = 600
+
+# Chế độ ghi nhớ layout bàn phím: "global" (chung toàn hệ thống)
+track_layout = "global"
+
+# ==============================================================================
+# 2. CHẾ ĐỘ FOCUS THEO CHUỘT (FOLLOW MOUSE)
+# ==============================================================================
+[input.focus]
+# Di chuột qua cửa sổ nào thì focus cửa sổ đó (follow_mouse = 1)
+follows_mouse = true
+
+# Di chuột qua cửa sổ sẽ đưa nó lên trên (hover_raises = true)
+hover_raises = true
+
+# Giới hạn cuộn layout tự động khi di chuột theo focus
+follows_mouse_max_scroll = 0.5
+
+# ==============================================================================
+# 3. CẤU HÌNH CHUỘT (MOUSE)
+# ==============================================================================
+[input.mouse]
+# Profile gia tốc chuột: "flat" (tắt hoàn toàn gia tốc - chuẩn chơi game & đồ họa)
+accel_profile = "flat"
+
+# Độ nhạy con trỏ: 0.0 (chuẩn không scale)
+sensitivity = 0.0
+
+# Cuộn chuột thông thường (không đảo ngược)
+natural_scroll = false
+
+# Khoảng cách cuộn layout khi dùng chuột cuộn
+scroll_wheel_step = 60
+
+# ==============================================================================
+# 4. CẤU HÌNH TOUCHPAD (BÀN DI CHUỘT LAPTOP)
+# ==============================================================================
+[input.touchpad]
+# Chạm nhẹ để click (tap_to_click = true)
+tap = true
+
+# Giữ ngón sau khi tap để tiếp tục kéo cửa sổ (tap and drag)
+tap_and_drag = true
+
+# Cuộn trang tự nhiên kiểu điện thoại/macOS (natural_scroll = true)
+natural_scroll = true
+
+# Kiểu click cơ học: dùng vùng nút bấm (tương đương clickfinger_behavior = false)
+click_method = "button_areas"
+
+# Quy tắc gõ ngón: 1 ngón = click trái, 2 ngón = click phải, 3 ngón = click giữa (lrm)
+tap_button_map = "left_right_middle"
+
+# Tự động tắt touchpad khi đang gõ phím để tránh chạm nhầm
+disable_while_typing = true
+
+# ==============================================================================
+# 5. CẤU HÌNH RIÊNG CHO TỪNG THIẾT BỊ (PER-DEVICE OVERRIDES)
+# ==============================================================================code
+

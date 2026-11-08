@@ -1,0 +1,145 @@
+# ~/.config/umbriel/appearance.toml
+# Cấu hình màu sắc, viền, bóng đổ, làm mờ và giao diện Tab
+
+# ==========================================
+# 1. BẢNG MÀU HỆ THỐNG
+# ==========================================
+[colors]
+# Màu nền panel/banner của Umbriel
+background = "#141419FF"
+text_primary = "#E8E8EAFF"
+text_muted = "#8A8A92FF"
+
+# Màu bóng đổ (Tương đương color = "rgba(30, 30, 30, 0.9)" bên Hyprland)
+shadow = "#1E1E1EE6"
+
+# Màu sắc đường viền cửa sổ
+[colors.border]
+# Viền cửa sổ đang Active (rgb(0, 139, 255) -> #008BFFFF)
+focused = "#008BFFFF"
+
+# Viền cửa sổ không Active (rgba(139, 139, 139, 0.67) -> #8B8B8BAA)
+unfocused = "#8B8B8BAA"
+
+# Màu viền ngoài phụ (nếu dùng 2 lớp viền)
+outer = "#1A1A1FFF"
+
+# ==========================================
+# 2. CẤU HÌNH NGOẠI QUAN CỬA SỔ
+# ==========================================
+[appearance]
+# Ưu tiên trang trí phía server (SSD), tắt thanh bar thừa của app client nếu app hỗ trợ
+prefer_no_csd = true
+
+# Độ dày viền cửa sổ (border_size = 2)
+border_width = 2
+
+# Độ dày viền ngoài
+outer_border_width = 0
+
+# Độ bo góc (rounding = 0: góc vuông sắc cạnh)
+corner_radius = 0
+
+# Độ trong suốt khi đang kéo cửa sổ di chuyển
+drag_opacity = 0.75
+
+# Ép cửa sổ Fullscreen luôn hiển thị Opaque (tiết kiệm pin & tăng hiệu năng)
+opaque_fullscreen = true
+
+# ==========================================
+# 3. HIỆU ỨNG LÀM MỜ (BLUR)
+# ==========================================
+[appearance.blur]
+# Bật engine làm mờ
+enabled = true
+
+# Tối ưu hóa bộ nhớ đệm: chia sẻ chung 1 layer blur nền (rất mượt)
+optimized = true
+
+# Số lượt quét mờ (passes = 2)
+passes = 2
+
+# Bán kính mờ (tương đương size = 3)
+radius = 3
+
+# Độ nhiễu hạt nhẹ tạo cảm giác kính nhám
+noise = 0.02
+brightness = 0.9
+contrast = 0.9
+# Tăng nhẹ độ rực màu của vùng mờ (tương đương vibrancy = 0.1696)
+saturation = 1.15
+
+# ==========================================
+# 4. HIỆU ỨNG BÓNG ĐỔ (SHADOW)
+# ==========================================
+[appearance.shadow]
+# Bật bóng đổ (shadow.enabled = true)
+enabled = true
+
+# Độ mềm/bán kính của bóng (tương đương range = 3, render_power = 3)
+softness = 6
+
+# Độ lệch bóng đổ theo trục ngang và trục dọc
+offset_x = 0
+offset_y = 2
+
+# ==========================================
+# 5. GIAO DIỆN THANH TAB (GROUPBAR HYPRLAND)
+# ==========================================
+[appearance.tab_bar]
+# Hiển thị tiêu đề app trên từng tab
+style = "titles"
+
+# Vị trí thanh Tab đặt ở mép trên cửa sổ
+position = "top"
+
+# Chiều cao thanh tab: 16px (chuẩn theo hyprland của bạn)
+height = 16
+
+# Font chữ tiêu đề tab (tương đương Sans Bold 9)
+font = "sans bold 9"
+
+# Khoảng cách lề chữ và khoảng cách giữa các tab
+padding = 6
+tab_gap = 2
+
+# Bo góc thanh tab theo góc cửa sổ (corner_radius = 0)
+corner_radius = 0
+
+# Định dạng nhãn hiển thị trên Tab
+title_format = "{title}"
+title_align = "center"
+
+# Luôn hiện thanh tab khi cửa sổ được gom nhóm
+visible = true
+# Không ẩn thanh tab khi chỉ có 1 cửa sổ trong nhóm
+hide_when_single = false
+
+# ==========================================
+# 6. MÀU SẮC THANH TAB
+# ==========================================
+[colors.tab_bar]
+# Tab đang Active (rgb(139, 0, 247) -> #8B00F7FF)
+active = "#8B00F7FF"
+# Chữ trên Tab Active (rgb(0, 70, 246) -> #0046F6FF)
+active_text = "#0046F6FF"
+
+# Tab đang ẩn / Inactive (rgb(30, 30, 30) -> #1E1E1EFF)
+background = "#1E1E1EFF"
+# Chữ trên Tab đang ẩn (rgb(13, 13, 13) -> #0D0D0DFF)
+text = "#0D0D0DFF"
+
+# Tab khi ở cột không focus
+active_unfocused = "#292933FF"
+active_unfocused_text = "#8A8A92FF"
+
+# Màu tab khẩn cấp (khi app có thông báo mới)
+urgent = "#FF6B6BFF"
+urgent_text = "#141419FF"
+
+# ==========================================
+# 7. SERVER-SIDE TITLE BAR
+# ==========================================
+# Tắt thanh title bar mặc định của Umbriel để giữ giao diện phẳng nguyên bản như Hyprland
+[appearance.title_bar]
+mode = "off"

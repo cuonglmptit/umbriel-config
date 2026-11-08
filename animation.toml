@@ -1,0 +1,115 @@
+# # ~/.config/umbriel/animation.toml
+# # Hiệu ứng chuyển động mô phỏng chuẩn xác profile "Custom Optimized + Fast"
+#
+# # ==============================================================================
+# # 1. CÔNG TẮC CHÍNH & THỜI GIAN MẶC ĐỊNH
+# # ==============================================================================
+# [animation]
+# enabled = true
+# duration_ms = 250
+# curve = "easeout"
+#
+# # ==============================================================================
+# # 2. ĐỊNH NGHĨA CÁC ĐƯỜNG CONG BÉZIER (TỪ FILE LUA CỦA BẠN)
+# # ==============================================================================
+# [animation.beziers]
+# # Đường cong mở cửa sổ mượt mà (winIn)
+# winIn = [0.07, 0.88, 0.04, 0.99]
+#
+# # Đường cong quán tính gió (wind)
+# wind = [0.05, 0.85, 0.03, 0.97]
+#
+# # Đường cong đóng cửa sổ nhanh dứt khoát (easeOutCirc)
+# easeOutCirc = [0.0, 0.48, 0.38, 1.0]
+#
+# # Đường cong chuyển Workspace siêu tốc (easeOutExpo)
+# easeOutExpo = [0.16, 1.0, 0.3, 1.0]
+#
+# # Đường cong Material Design 3 giảm tốc (md3_decel)
+# md3_decel = [0.05, 0.80, 0.10, 0.97]
+#
+# # Đường cong Material Design 3 tăng tốc (md3_accel)
+# md3_accel = [0.20, 0.0, 0.80, 0.08]
+#
+# # Đường cong tuyến tính (liner)
+# liner = [1.0, 1.0, 1.0, 1.0]
+#
+# # ==============================================================================
+# # 3. HIỆU ỨNG CỬA SỔ (WINDOWS)
+# # ==============================================================================
+# # Cửa sổ xuất hiện (Mở app): Trượt nhẹ vào (slide) với đường cong winIn
+# [animation.windows_in]
+# enabled = true
+# duration_ms = 280
+# curve = "winIn"
+# style = "slide"
+#
+# # Cửa sổ biến mất (Đóng app): Thu lại mượt mà với easeOutCirc
+# [animation.windows_out]
+# enabled = true
+# duration_ms = 230
+# curve = "easeOutCirc"
+# style = "popin"
+# scale = 0.85
+#
+# # Cửa sổ di chuyển / Thay đổi vị trí trong layout: Dùng quán tính wind
+# [animation.windows_move]
+# enabled = true
+# duration_ms = 260
+# curve = "wind"
+#
+# # Cửa sổ co giãn kích thước (Resize)
+# [animation.windows_resize]
+# enabled = true
+# duration_ms = 250
+# curve = "wind"
+#
+# # ==============================================================================
+# # 4. CHUYỂN ĐỔI WORKSPACE & OVERVIEW
+# # ==============================================================================
+# # Trượt mượt giữa các Workspace (Dùng đường cong tốc độ cao easeOutExpo)
+# [animation.workspaces]
+# enabled = true
+# duration_ms = 280
+# curve = "easeOutExpo"
+# style = "slide"
+#
+# # Hiệu ứng mở/đóng Workspace Overview
+# [animation.overview]
+# enabled = true
+# duration_ms = 250
+# curve = "md3_decel"
+#
+# # ==============================================================================
+# # 5. SCRATCHPAD (SPECIAL WORKSPACE)
+# # ==============================================================================
+# # Hiệu ứng trượt của cửa sổ Scratchpad (dim nền 80%)
+# [animation.scratchpad]
+# enabled = true
+# duration_ms = 250
+# curve = "md3_decel"
+# dim = 0.8
+# blur = false
+#
+# # ==============================================================================
+# # 6. GIAO DIỆN HỆ THỐNG (LAYERS: NOCTALIA BAR & CONTROL CENTER)
+# # ==============================================================================
+# [animation.layers]
+# enabled = true
+# duration_ms = 200
+# curve = "md3_decel"
+#
+# # ==============================================================================
+# # 7. HIỆU ỨNG VIỀN & MỜ ĐỤC KHI FOCUS
+# # ==============================================================================
+# # Đổi màu viền khi chuyển focus giữa các cửa sổ
+# [animation.border]
+# enabled = true
+# duration_ms = 150
+# curve = "liner"
+#
+# # Độ mờ và làm mờ nền chuyển tiếp mượt mà khi đổi focus
+# [animation.windows_opacity]
+# enabled = true
+# duration_ms = 200
+# curve = "md3_decel"
