@@ -114,7 +114,7 @@
 "Mod+Alt+M" = "spawn sh -c 'killall -9 wl-kbptr; wl-kbptr -o modes=tile'"
 "Mod+Alt+N" = "spawn sh -c 'killall -9 wl-kbptr; wl-kbptr -o modes=bisect'"
 
-"Mod+Comma" = { action = "submap cursor", repeat = false }
+"Mod+Comma" = { action = "spawn notify-send -t 4000 -u low '🖱️ CHẾ ĐỘ CHUỘT: ĐANG BẬT' '• HJKL: Di chuyển\n• U/I/O: Click Trái/Giữa/Phải\n• N/M: Cuộn chuột\n• ESC: Thoát'", submap = "cursor", repeat = false }
 
 "submap[cursor],K" = { action = "spawn ydotool mousemove -- 0 -15", repeat = true }
 "submap[cursor],H" = { action = "spawn ydotool mousemove -- -15 0", repeat = true }
