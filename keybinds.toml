@@ -173,8 +173,8 @@
 "Ctrl+Mod+V" = "spawn sh -c 'pgrep -x pavucontrol && pkill -x pavucontrol || pavucontrol -t 3'"
 
 # Khóa máy và tắt màn hình (DPMS)
-"XF86PowerOff" = { action = "spawn sh -c 'noctalia msg session lock && sleep 0.5 && umbriel msg dpms-off'", allow_when_locked = true }
-"Mod+Ctrl+O"   = { action = "spawn sh -c 'noctalia msg session lock && sleep 0.5 && umbriel msg dpms-off'", allow_when_locked = true }
+"XF86PowerOff" = { action = "spawn sh -c 'noctalia msg session lock && sleep 3 && umbriel msg dpms-off'", allow_when_locked = true }
+"Mod+Ctrl+O"   = { action = "spawn sh -c 'noctalia msg session lock && sleep 3 && umbriel msg dpms-off'", allow_when_locked = true }
 
 # ==============================================================================
 # 10. PHÍM PHẦN CỨNG ĐỒNG BỘ QUA NOCTALIA OSD & MEDIA (v5.4.1)
@@ -202,3 +202,8 @@
 
 # 3. Chụp riêng cửa sổ đang focus + Mở thanh Annotation
 "Alt+Print"   = { action = "spawn noctalia msg screenshot-window --annotate --copy-to-clipboard", repeat = false }
+
+[hot_corners.top_left]
+enabled = true
+delay_ms = 500
+action = "overview-open"

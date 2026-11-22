@@ -16,7 +16,7 @@ client_window_drag = false
 layout = "us"
 
 # Tự động bật đèn phím số NumLock khi khởi động (numlock_by_default = true)
-numlock_toggle = true
+# numlock_toggle = true
 
 # Tốc độ lặp phím khi giữ (mặc định: 25 lần/giây, delay 600ms)
 repeat_rate = 25

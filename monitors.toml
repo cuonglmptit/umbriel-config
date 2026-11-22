@@ -5,6 +5,7 @@ scale = 1.0
 transform = "normal"
 focus_at_startup = true
 workspace_axis = "horizontal"
+vrr = "disabled"
 # mode = "1920x1080@144"
 
 # min_workspaces = 1
