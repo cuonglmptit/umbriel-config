@@ -1,0 +1,10 @@
+# ~/.config/umbriel/output-prefs.toml
+
+[output."BOE 0x08DF Unknown"]
+focus_at_startup = true
+workspace_axis = "horizontal"
+min_workspaces = 10
+
+[output."Samsung Electric Company SAMSUNG Unknown"]
+workspace_axis = "horizontal"
+min_workspaces = 10

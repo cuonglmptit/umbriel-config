@@ -3,8 +3,8 @@ set -eu
 
 LAPTOP="eDP-1"
 STATE_FILE="${XDG_RUNTIME_DIR:-/tmp}/umbriel-mirror-windows.tsv"
+EXT_TF_FILE="${XDG_RUNTIME_DIR:-/tmp}/umbriel-mirror-ext-transform"
 
-# Tự phát hiện màn hình ngoài đầu tiên (HDMI-A-1, DP-1...)
 EXT="$(umbriel outputs --json | jq -r --arg l "$LAPTOP" '.[] | select(.name != $l) | .name' | head -n 1)"
 
 get_laptop_width() {
@@ -16,13 +16,18 @@ get_laptop_width() {
     ' 2>/dev/null || echo 1920
 }
 
+get_output_transform() {
+    umbriel outputs --json | jq -r --arg o "$1" '
+        .[] | select(.name == $o) | .transform // "normal"
+    ' 2>/dev/null || echo "normal"
+}
+
 get_active_ws_index() {
     umbriel workspaces --json | jq -r --arg o "$1" '
         .[] | select(.output == $o and .active == true) | .index
     ' | head -n 1
 }
 
-# Lấy danh sách tên Bar của Noctalia đang chạy trên một màn hình
 get_output_bars() {
     umbriel layers --json | jq -r --arg out "$1" '
         [.[] | select(.output == $out and (.namespace | startswith("noctalia-bar-")))
@@ -30,14 +35,15 @@ get_output_bars() {
     ' 2>/dev/null || true
 }
 
-# Ẩn và đưa Bar trên màn ngoài về lớp top (không đụng tới Bar overlay của Laptop)
-suppress_ext_bar() {
+suppress_ext_bar_once() {
     bars="$(get_output_bars "$EXT")"
     [ -n "$bars" ] || bars="default main"
     for b in $bars; do
         noctalia msg bar-layer-set top "$b" "$EXT" >/dev/null 2>&1 || true
         noctalia msg bar-hide "$b" "$EXT" >/dev/null 2>&1 || true
     done
+
+    sleep 0.15
 
     still_overlay="$(umbriel layers --json | jq -r --arg out "$EXT" '
         any(.[]; .output == $out and .mapped == true and .layer == "overlay" and (.namespace | startswith("noctalia-bar-")))
@@ -47,13 +53,35 @@ suppress_ext_bar() {
     fi
 }
 
-# Trả Bar về lại lớp overlay và hiện lại bình thường
+suppress_ext_bar() {
+    suppress_ext_bar_once
+    # Theo dõi thêm vài nhịp đề phòng Noctalia tạo lại Bar chậm sau khi đổi output
+    (
+        for delay in 0.4 0.5 0.6; do
+            sleep "$delay"
+            pgrep -x wl-mirror >/dev/null 2>&1 || exit 0
+            suppress_ext_bar_once
+        done
+    ) >/dev/null 2>&1 &
+}
+
 restore_overlay_bar() {
     noctalia msg bar-layer-set overlay >/dev/null 2>&1 || true
     noctalia msg bar-show >/dev/null 2>&1 || true
 }
 
-# Gom toàn bộ cửa sổ đang mở ở màn ngoài về Laptop trước khi Mirror và lưu lại
+restore_ext_transform() {
+    if [ -n "$EXT" ] && [ -f "$EXT_TF_FILE" ]; then
+        saved_tf="$(cat "$EXT_TF_FILE" 2>/dev/null || echo normal)"
+        [ -n "$saved_tf" ] || saved_tf="normal"
+        cur_tf="$(get_output_transform "$EXT")"
+        if [ "$cur_tf" != "$saved_tf" ]; then
+            wlr-randr --output "$EXT" --transform "$saved_tf" >/dev/null 2>&1 || true
+        fi
+        rm -f "$EXT_TF_FILE"
+    fi
+}
+
 evacuate_ext_windows() {
     ws_json="$(umbriel workspaces --json 2>/dev/null || echo '[]')"
     win_json="$(umbriel windows --json 2>/dev/null || echo '[]')"
@@ -68,7 +96,6 @@ evacuate_ext_windows() {
     [ -n "$laptop_active_ws" ] || laptop_active_ws=1
     [ -n "$ext_active_ws" ] || ext_active_ws=1
 
-    # Tìm tất cả cửa sổ thường trên màn ngoài (bỏ qua wl-mirror, pinned, scratchpad, minimized)
     items="$(printf '%s' "$win_json" | jq -r --arg ext "$EXT" --argjson ws "$ws_json" '
         .[]
         | select(
@@ -99,7 +126,6 @@ evacuate_ext_windows() {
     done
 }
 
-# Trả các cửa sổ đã lưu về lại màn ngoài khi thoát Mirror về Extend
 restore_ext_windows() {
     [ -s "$STATE_FILE" ] || return 0
     win_json="$(umbriel windows --json 2>/dev/null || echo '[]')"
@@ -130,7 +156,7 @@ choice="$(printf '%s\n' "$MENU" | noctalia dmenu -p "Chế độ màn hình")" |
 case "$choice" in
     1.*)
         pkill -x wl-mirror 2>/dev/null || true
-        rm -f "$STATE_FILE"
+        rm -f "$STATE_FILE" "$EXT_TF_FILE"
         umbriel msg output-enable "$LAPTOP"
         if [ -n "$EXT" ]; then
             umbriel msg output-disable "$EXT"
@@ -145,6 +171,8 @@ case "$choice" in
         pkill -x wl-mirror 2>/dev/null || true
         rm -f "$STATE_FILE"
         umbriel msg output-enable "$EXT"
+        sleep 0.2
+        restore_ext_transform
         umbriel msg output-disable "$LAPTOP"
         restore_overlay_bar
         ;;
@@ -154,6 +182,7 @@ case "$choice" in
         if [ -n "$EXT" ]; then
             umbriel msg output-enable "$EXT"
             sleep 0.3
+            restore_ext_transform
             LAPTOP_W="$(get_laptop_width)"
             [ "${LAPTOP_W:-0}" -gt 0 ] 2>/dev/null || LAPTOP_W=1920
             wlr-randr --output "$LAPTOP" --pos 0,0 --output "$EXT" --pos "${LAPTOP_W},0"
@@ -168,7 +197,6 @@ case "$choice" in
         fi
         pkill -x wl-mirror 2>/dev/null || true
 
-        # Ghi nhớ cửa sổ đang focus trên Laptop trước khi gom
         LAPTOP_WIN="$(umbriel windows --json | jq -r --arg l "$LAPTOP" '
             [.[] | select(.focused == true and ((.output == $l) or ((.workspace // "") | startswith($l + ":"))))] | first | .id // empty
         ' 2>/dev/null || true)"
@@ -178,20 +206,30 @@ case "$choice" in
             ' 2>/dev/null || true)"
         fi
 
-        # Bật cả 2 màn và gom hết cửa sổ đang mở bên màn 2 về Laptop trước
         umbriel msg output-enable "$LAPTOP"
         umbriel msg output-enable "$EXT"
         sleep 0.4
+
+        if [ ! -f "$EXT_TF_FILE" ]; then
+            get_output_transform "$EXT" > "$EXT_TF_FILE"
+        fi
+        laptop_tf="$(get_output_transform "$LAPTOP")"
+        ext_tf="$(get_output_transform "$EXT")"
+
         evacuate_ext_windows
 
-        # Tách màn ngoài ra xa (10000,0) để khóa chuột 100% trong màn Laptop
-        wlr-randr --output "$LAPTOP" --pos 0,0 --output "$EXT" --pos 10000,0
+        # Chỉ truyền --transform nếu hướng 2 màn đang khác nhau
+        if [ "$ext_tf" != "$laptop_tf" ]; then
+            wlr-randr --output "$LAPTOP" --pos 0,0 \
+                      --output "$EXT" --pos 10000,0 --transform "$laptop_tf"
+        else
+            wlr-randr --output "$LAPTOP" --pos 0,0 \
+                      --output "$EXT" --pos 10000,0
+        fi
         sleep 0.2
 
-        # Chạy wl-mirror chiếu Laptop lên toàn màn ngoài
         setsid -f wl-mirror --fullscreen-output "$EXT" --fullscreen "$LAPTOP" >/dev/null 2>&1
 
-        # Đảm bảo wl-mirror nằm đúng bên màn ngoài ($EXT) và fullscreen
         i=0
         MIRROR_ID=""
         while [ "$i" -lt 20 ]; do

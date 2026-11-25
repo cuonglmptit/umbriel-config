@@ -1,6 +1,7 @@
 [include]
 files = [
-  "monitors.toml",
+  "outputs.toml",
+  "output-prefs.toml",
   "environment.toml",
   "general.toml",
   "appearance.toml",

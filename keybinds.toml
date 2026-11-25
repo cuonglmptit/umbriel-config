@@ -15,6 +15,17 @@
 "Mod+Shift+Escape" = { action = "shortcuts-inhibit-toggle", allow_when_inhibited = true, repeat = false }
 "Alt+Shift_L"  = "spawn fcitx5-remote -t"
 
+# Menu chọn nhanh chế độ màn hình (Chỉ màn 1 / Chỉ màn 2 / Extend / Mirror / GUI)
+"Mod+Ctrl+P" = { action = "spawn ~/.config/umbriel/scripts/display-mode.sh", repeat = false }
+
+# (Tùy chọn) Mở thẳng bảng kéo-thả màn hình hoặc bảng Mirror của Noctalia nếu muốn:
+# "Mod+Alt+P" = { action = "spawn noctalia msg panel-toggle prponkshe/umbriel-displays:arrange", repeat = false }
+
+# Xoay đúng màn hình đang focus
+"Ctrl+Alt+Up"    = { action = "spawn ~/.config/umbriel/scripts/rotate-output.sh normal", repeat = false }
+"Ctrl+Alt+Left"  = { action = "spawn ~/.config/umbriel/scripts/rotate-output.sh 90", repeat = false }
+"Ctrl+Alt+Down"  = { action = "spawn ~/.config/umbriel/scripts/rotate-output.sh 180", repeat = false }
+"Ctrl+Alt+Right" = { action = "spawn ~/.config/umbriel/scripts/rotate-output.sh 270", repeat = false }
 # ==============================================================================
 # 2. ĐỔI LAYOUT XOAY VÒNG (NATIVE ACTION)
 # ==============================================================================

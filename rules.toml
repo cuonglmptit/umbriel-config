@@ -1,6 +1,14 @@
 # ~/.config/umbriel/rules.toml
 # Toàn bộ quy tắc cửa sổ (Window Rules) và lớp giao diện (Layer Rules)
 
+[[window_rule]]
+match.app_id = "^at\\.yrlf\\.wl_mirror$"
+default_output = "HDMI-A-1"
+default_fullscreen = true
+default_focused = false
+border_width = 0
+shadow = false
+
 # ==============================================================================
 # 1. LAYER RULES DÀNH CHO NOCTALIA v5
 # ==============================================================================
