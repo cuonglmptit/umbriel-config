@@ -4,13 +4,13 @@
 
 [output."BOE 0x08DF Unknown"]
 enabled = false
-position = [0, 864]
+position = [0, 0]
 scale = 1
 
 [output."Samsung Electric Company SAMSUNG Unknown"]
 mode = "1920x1080@60"
 position = [0, 0]
-scale = 1.5
+scale = 1.25
 hdr = "off"
 sdr_white = 200
 min_workspaces = 3

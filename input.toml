@@ -8,6 +8,9 @@ middle_click_paste = false
 # Cho phép kéo cửa sổ bằng thanh tiêu đề client của app (Chromium, Firefox, v.v.)
 client_window_drag = false
 
+[input.cursor]
+hardware_cursor = false
+
 # ==============================================================================
 # 1. CẤU HÌNH BÀN PHÍM
 # ==============================================================================

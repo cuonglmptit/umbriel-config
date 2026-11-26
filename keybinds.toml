@@ -26,6 +26,9 @@
 "Ctrl+Alt+Left"  = { action = "spawn ~/.config/umbriel/scripts/rotate-output.sh 90", repeat = false }
 "Ctrl+Alt+Down"  = { action = "spawn ~/.config/umbriel/scripts/rotate-output.sh 180", repeat = false }
 "Ctrl+Alt+Right" = { action = "spawn ~/.config/umbriel/scripts/rotate-output.sh 270", repeat = false }
+
+#Khởi đọng lại noctalia nếu như bị chết
+"Mod+Ctrl+B" = { action = "spawn sh -c 'pkill -x noctalia; setsid -f noctalia >/dev/null 2>&1'", repeat = false }
 # ==============================================================================
 # 2. ĐỔI LAYOUT XOAY VÒNG (NATIVE ACTION)
 # ==============================================================================
@@ -120,12 +123,14 @@
 # ==============================================================================
 # 8. ĐIỀU KHIỂN CHUỘT (WL-KBPTR & SUBMAP YDOTOOL)
 # ==============================================================================
-"Mod+M"     = "spawn sh -c 'killall -9 wl-kbptr; wl-kbptr -o modes=tile,click'"
-"Mod+N"     = "spawn sh -c 'killall -9 wl-kbptr; wl-kbptr -o modes=bisect,click'"
-"Mod+Alt+M" = "spawn sh -c 'killall -9 wl-kbptr; wl-kbptr -o modes=tile'"
-"Mod+Alt+N" = "spawn sh -c 'killall -9 wl-kbptr; wl-kbptr -o modes=bisect'"
+"Mod+M" = { action = "spawn sh -c 'killall -9 wl-kbptr; wl-kbptr -o modes=floating,click -o mode_floating.source=detect'", repeat = false }
+"Mod+Alt+M" = { action = "spawn sh -c 'killall -9 wl-kbptr; wl-kbptr -o modes=floating -o mode_floating.source=detect'", repeat = false }
+"Mod+N"     = { action = "spawn sh -c 'killall -9 wl-kbptr; wl-kbptr -o modes=tile,click'", repeat = false }
+"Mod+Comma"     = { action = "spawn sh -c 'killall -9 wl-kbptr; wl-kbptr -o modes=bisect,click'", repeat = false }
+"Mod+Alt+N" = { action = "spawn sh -c 'killall -9 wl-kbptr; wl-kbptr -o modes=tile'", repeat = false }
+"Mod+Alt+Comma" = { action = "spawn sh -c 'killall -9 wl-kbptr; wl-kbptr -o modes=bisect'", repeat = false }
 
-"Mod+Comma" = { action = "spawn notify-send -t 4000 -u low '🖱️ CHẾ ĐỘ CHUỘT: ĐANG BẬT' '• HJKL: Di chuyển\n• U/I/O: Click Trái/Giữa/Phải\n• N/M: Cuộn chuột\n• ESC: Thoát'", submap = "cursor", repeat = false }
+"Mod+Semicolon" = { action = "spawn notify-send -t 4000 -u low '🖱️ CHẾ ĐỘ CHUỘT: ĐANG BẬT' '• HJKL: Di chuyển\n• U/I/O: Click Trái/Giữa/Phải\n• N/M: Cuộn chuột\n• ESC: Thoát'", submap = "cursor", repeat = false }
 
 "submap[cursor],K" = { action = "spawn ydotool mousemove -- 0 -15", repeat = true }
 "submap[cursor],H" = { action = "spawn ydotool mousemove -- -15 0", repeat = true }
